@@ -70,12 +70,12 @@ def all_cm(event, vjoy): # "ALL CM" FUNCTION
   
 
   
-############################################################
-##                                                        ##
-##  FOLOWING MACROS CURRENTLY DON'T WORK IN STAR CITIZEN  ##
-##                THIS WILL BE FIXED.                     ##
-##                                                        ##
-############################################################
+######################################################
+##                                                  ##
+##  KEYBOARD MACROS ONLY WORK IN STAR CITIZEN IF    ##
+##  JOYSTICK GREMLIN IS LAUNCHED AS ADMINISTRATOR   ##
+##                                                  ##
+######################################################
   
 macro_toggle_chat = macro.Macro()
 macro_toggle_chat.tap("F12")
@@ -127,7 +127,7 @@ def custom_3(event, vjoy):
 
 macro_toggle_video_rec = macro.Macro()
 macro_toggle_video_rec.press("RAlt")
-macro_toggle_video_rec.tap("F8")
+macro_toggle_video_rec.tap("F7")
 macro_toggle_video_rec.release("RAlt")
 
 # ARDUINO BUTTON 57 PRESS.
@@ -138,7 +138,9 @@ def custom_4(event, vjoy):
       macro_toggle_video_rec.run()
 
 macro_save_video_last_five = macro.Macro()
-macro_save_video_last_five.tap(macro.Keys.F12)
+macro_save_video_last_five.press("RAlt")
+macro_save_video_last_five.tap("F8")
+macro_save_video_last_five.release("RAlt")
    
 # ARDUINO BUTTON 58 PRESS.
 @arduino_leonardo_1.button(58)
