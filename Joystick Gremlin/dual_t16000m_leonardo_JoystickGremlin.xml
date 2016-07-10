@@ -1,0 +1,289 @@
+<?xml version="1.0" ?>
+<devices version="1">
+    <device id="1325664945" name="T.16000M" windows_id="0">
+        <mode name="Default">
+            <axis description="" id="1">
+                <remap axis="1" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="1"/>
+            </axis>
+            <axis description="" id="2">
+                <remap axis="2" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="1"/>
+                <response-curve>
+                    <mapping type="cubic-spline">
+                        <control-point x="-1.0" y="-1.0"/>
+                        <control-point x="1.0" y="1.0"/>
+                    </mapping>
+                    <deadzone center-high="0.0" center-low="0.0" high="1.0" low="-1.0"/>
+                </response-curve>
+            </axis>
+            <axis description="" id="3">
+                <remap axis="3" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="1"/>
+            </axis>
+            <axis always-execute="True" description="" id="4">
+                <remap axis="7" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="1"/>
+            </axis>
+            <button description="" id="1">
+                <remap button="1" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="2">
+                <remap button="2" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="3">
+                <remap button="3" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="4">
+                <remap button="4" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="5"/>
+            <button description="" id="6"/>
+            <button description="" id="7"/>
+            <button description="" id="8"/>
+            <button description="" id="9"/>
+            <button description="" id="10"/>
+            <button description="" id="11"/>
+            <button description="" id="12"/>
+            <button description="" id="13"/>
+            <button description="" id="14"/>
+            <button description="" id="15"/>
+            <button description="" id="16"/>
+            <hat description="" id="1"/>
+        </mode>
+    </device>
+    <device id="0" name="keyboard" windows_id="0">
+        <mode name="Default"/>
+    </device>
+    <device id="1325664945" name="T.16000M" windows_id="1">
+        <mode name="Default">
+            <axis description="" id="1">
+                <remap axis="1" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="2"/>
+            </axis>
+            <axis description="" id="2">
+                <remap axis="2" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="2"/>
+            </axis>
+            <axis description="" id="3">
+                <remap axis="3" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="2"/>
+            </axis>
+            <axis description="" id="4"/>
+            <button description="" id="1">
+                <remap button="1" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="2">
+                <remap button="2" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="3">
+                <remap button="3" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="4">
+                <remap button="4" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="5"/>
+            <button description="" id="6"/>
+            <button description="" id="7"/>
+            <button description="" id="8"/>
+            <button description="" id="9"/>
+            <button description="" id="10"/>
+            <button description="" id="11"/>
+            <button description="" id="12"/>
+            <button description="" id="13"/>
+            <button description="" id="14"/>
+            <button description="" id="15"/>
+            <button description="" id="16"/>
+            <hat description="" id="1"/>
+        </mode>
+    </device>
+    <device id="1092826752" name="Arduino Leonardo" windows_id="4">
+        <mode name="Default">
+            <axis description="" id="1"/>
+            <axis description="" id="2"/>
+            <axis description="" id="3"/>
+            <axis description="" id="4"/>
+            <axis description="" id="5"/>
+            <axis description="" id="6"/>
+            <axis description="" id="7"/>
+            <axis description="" id="8"/>
+            <axis description="" id="9"/>
+            <axis description="" id="10"/>
+            <axis description="" id="11"/>
+            <button description="" id="1">
+                <remap button="7" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="2">
+                <remap button="35" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="3">
+                <remap button="8" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="4">
+                <remap button="36" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="5">
+                <remap button="9" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="6">
+                <remap button="10" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="7">
+                <remap button="11" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="8">
+                <remap button="12" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="9">
+                <remap button="18" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="10">
+                <remap button="19" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="11">
+                <remap button="20" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="12">
+                <remap button="21" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="13">
+                <remap button="13" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="14">
+                <remap button="7" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="15">
+                <remap button="8" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="16">
+                <remap button="14" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="17">
+                <remap button="16" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="18">
+                <remap button="15" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="19">
+                <remap button="17" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="20">
+                <remap button="5" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="21">
+                <remap button="18" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="22">
+                <remap button="6" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="23">
+                <remap button="20" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="24">
+                <remap button="19" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="25">
+                <remap button="21" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="26">
+                <remap button="4" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="27">
+                <remap button="22" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="28">
+                <remap button="40" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="29">
+                <remap button="10" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="30">
+                <remap button="23" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="31">
+                <remap button="24" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="32">
+                <remap button="26" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="33">
+                <remap button="25" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="34">
+                <remap button="12" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="35">
+                <remap button="11" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="36">
+                <remap button="14" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="37">
+                <remap button="13" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="38">
+                <remap button="4" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="39">
+                <remap button="3" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="40">
+                <remap button="22" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="41">
+                <remap button="23" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="42">
+                <remap button="24" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="43">
+                <remap button="15" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="44">
+                <remap button="41" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="45">
+                <remap button="30" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="46">
+                <remap button="29" on-press="True" on-release="True" vjoy="2"/>
+            </button>
+            <button description="" id="47">
+                <remap button="16" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="48">
+                <remap button="25" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="49">
+                <remap button="26" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="50">
+                <remap button="27" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="51">
+                <remap button="28" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="52">
+                <remap button="29" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="53">
+                <remap button="17" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="54"/>
+            <button description="" id="55"/>
+            <button description="" id="56"/>
+            <button description="" id="57"/>
+            <button description="" id="58"/>
+            <button description="" id="59">
+                <remap button="37" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="60">
+                <remap button="39" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="61">
+                <remap button="40" on-press="True" on-release="True" vjoy="1"/>
+            </button>
+            <button description="" id="62"/>
+            <button description="" id="63"/>
+            <button description="" id="64"/>
+        </mode>
+    </device>
+    <import>
+        <module name="custom_buttons"/>
+        <module name="hats_2_buttons"/>
+        <module name="cyclic_functions"/>
+    </import>
+</devices>
