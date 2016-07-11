@@ -1,5 +1,4 @@
 import gremlin
-import logging
 
 right_t16000m = gremlin.input_devices.JoystickDecorator(name="T.16000M", device_id=(1325664945, 1), mode="Default")
 arduino_leonardo_1 = gremlin.input_devices.JoystickDecorator(name="Arduino Leonardo", device_id=(1092826752, 4), mode="Default")
@@ -11,6 +10,9 @@ left_t16000m = gremlin.input_devices.JoystickDecorator(name="T.16000M", device_i
 # logging.getLogger("user").debug("User debug info.")
 # or
 # gremlin.util.display_error("Error popup")
+
+# This module creates button presses from hat movements from each joystick.
+# It allows hat movements to be mapped to virtual button presses which are also triggered by button presses on the control panel.
 
 # # LEFT HAT MOVEMENT
 
