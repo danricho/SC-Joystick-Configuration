@@ -10,6 +10,9 @@ from vjoy.vjoy import AxisName
 # or
 # gremlin.util.display_error("Error popup")
 
+# This module contains a time triggered (periodic) function which is designed to read the state of the sliders on the joysticks and report them irrespective if they have moved and caused an event.
+# Currently this function is disabled as I have a throttle +/- button press event mapped against my hats and don't want the setting overwritten by the slider position.
+
 # Periodic function (every second)
 @gremlin.input_devices.periodic(0.5)
 def slider_update(vjoy, joy):
