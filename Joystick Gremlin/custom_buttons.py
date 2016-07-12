@@ -4,32 +4,29 @@ import threading    # Threading allows the longer functions to be non-blocking
 import logging      # Used for logging events and debugging
 
 # Defining the controllers
-t16000m_left = gremlin.input_devices
-                .JoystickDecorator(name="T.16000M", 
-                                   device_id=(1325664945, 0),
-                                   mode="Default")
-t16000m_right = gremlin.input_devices
-                 .JoystickDecorator(name="T.16000M",
-                                    device_id=(1325664945, 1),
-                                    mode="Default")
-control_panel = gremlin.input_devices
-                 .JoystickDecorator(name="Arduino Leonardo", 
-                                    device_id=(1092826752, 4), 
-                                    mode="Default")
-
-'''============================================================================
-
-LOGGING
--------
-
-Adding a log entry into the log window of the JG GUI:
-  logging.getLogger("system").debug("System log entry.")
-  logging.getLogger("user").debug("User log entry.")
-
-Generating a popup:
-  gremlin.util.display_error("Error popup")
-
-============================================================================'''
+t16000m_left = gremlin.input_devices\
+                 .JoystickDecorator(name = "T.16000M", 
+                                    device_id = (1325664945, 
+                                                 0
+                                                ), 
+                                    mode = "Default"
+                                   )
+t16000m_right = gremlin.input_devices\
+                  .JoystickDecorator(name = "T.16000M", 
+                                     device_id = (1325664945, 
+                                                  1
+                                                  ), 
+                                     mode = "Default"
+                                    )
+control_panel = gremlin.input_devices\
+                  .JoystickDecorator(name = "Arduino Leonardo", 
+                                     device_id = (1092826752, 
+                                                  4
+                                                 ), 
+                                     mode="Default"
+                                    )
+vjoy = gremlin.input_devices.VJoyProxy()
+joy = gremlin.input_devices.JoystickProxy()
 
 TAP_LENGTH = 0.1   # Time (secs) between press and release of buttons
 
@@ -39,9 +36,6 @@ TAP_LENGTH = 0.1   # Time (secs) between press and release of buttons
  Notes:   Called as a threaded function to ensure that the controllers aren't
           locked during the time it is running.                             '''
 def quantum_escape():
-    vjoy = gremlin.input_devices.VJoyProxy()
-    joy = gremlin.input_devices.JoystickProxy()
-
     vjoy[2].button(30).is_pressed = True     # Enable QT system
     time.sleep(TAP_LENGTH)
     vjoy[2].button(30).is_pressed = False
@@ -64,9 +58,6 @@ def cp_button7(event, vjoy):
  Notes:   Called as a threaded function to ensure that the controllers aren't
           locked during the time it is running.                             '''
 def fire_both_cms():
-    vjoy = gremlin.input_devices.VJoyProxy()
-    joy = gremlin.input_devices.JoystickProxy()
-    
     vjoy[1].button(38).is_pressed = True     # Fire CM
     time.sleep(TAP_LENGTH)
     vjoy[1].button(38).is_pressed = False
@@ -118,17 +109,17 @@ def cp_button54(event, vjoy):
           The chat window must be hidden when this is run as the first 
           key-press toggles the chat window.                                '''
 macro_salute_emote = gremlin.input_devices.macro.Macro()
-macro_salute_emote.tap(macro.Keys.F12)
-macro_salute_emote.tap(macro.Keys.Enter)
-macro_salute_emote.tap(macro.Keys.Slash)
-macro_salute_emote.tap(macro.Keys.S)
-macro_salute_emote.tap(macro.Keys.A)
-macro_salute_emote.tap(macro.Keys.L)
-macro_salute_emote.tap(macro.Keys.U)
-macro_salute_emote.tap(macro.Keys.T)
-macro_salute_emote.tap(macro.Keys.E)
-macro_salute_emote.tap(macro.Keys.Enter)
-macro_salute_emote.tap(macro.Keys.F12)
+macro_salute_emote.tap("F12")
+macro_salute_emote.tap("Enter")
+macro_salute_emote.tap("/")
+macro_salute_emote.tap("S")
+macro_salute_emote.tap("A")
+macro_salute_emote.tap("L")
+macro_salute_emote.tap("U")
+macro_salute_emote.tap("T")
+macro_salute_emote.tap("E")
+macro_salute_emote.tap("Enter")
+macro_salute_emote.tap("F12")
 
 # Control Panel, Button 55 event (Custom 2)
 @control_panel.button(55)
@@ -146,15 +137,15 @@ def cp_button55(event, vjoy):
           The chat window must be hidden when this is run as the first 
           key-press toggles the chat window.                                '''
 macro_rude_emote = gremlin.input_devices.macro.Macro()
-macro_rude_emote.tap(macro.Keys.F12)
-macro_rude_emote.tap(macro.Keys.Enter)
-macro_rude_emote.tap(macro.Keys.Slash)
-macro_rude_emote.tap(macro.Keys.R)
-macro_rude_emote.tap(macro.Keys.U)
-macro_rude_emote.tap(macro.Keys.D)
-macro_rude_emote.tap(macro.Keys.E)
-macro_rude_emote.tap(macro.Keys.Enter)
-macro_rude_emote.tap(macro.Keys.F12)
+macro_rude_emote.tap("F12")
+macro_rude_emote.tap("Enter")
+macro_rude_emote.tap("/")
+macro_rude_emote.tap("R")
+macro_rude_emote.tap("U")
+macro_rude_emote.tap("D")
+macro_rude_emote.tap("E")
+macro_rude_emote.tap("Enter")
+macro_rude_emote.tap("F12")
 
 # Control Panel, Button 56 event (Custom 3)
 @control_panel.button(56)
@@ -197,3 +188,14 @@ def cp_button58(event, vjoy):
       # The button event was a "press", so run 
       # the ''' "ShadowPlay - Save Buffer" Keyboard Macro
       macro_toggle_sp_save_buffer.run()
+
+      
+'''============================================================================
+LOGGING
+-------
+Adding a log entry into the log window of the JG GUI:
+  logging.getLogger("system").debug("System log entry.")
+  logging.getLogger("user").debug("User log entry.")
+Generating a popup:
+  gremlin.util.display_error("Error popup")
+============================================================================'''
