@@ -25,8 +25,8 @@ control_panel = gremlin.input_devices\
                                                  ), 
                                      mode="Default"
                                     )
-vjoy = gremlin.input_devices.VJoyProxy()
-joy = gremlin.input_devices.JoystickProxy()
+                                    
+vjoy = gremlin.input_devices.VJoyProxy()                                    
 
 TAP_LENGTH = 0.1   # Time (secs) between press and release of buttons
 
