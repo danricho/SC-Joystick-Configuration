@@ -1,39 +1,55 @@
-import time
-import gremlin
-import logging
-from vjoy.vjoy import AxisName
+import gremlin      # 'Coz it's a Joystick Gremlin module!
+import time         # Used for delays between actions in some functions
+import threading    # Threading allows the longer functions to be non-blocking
+import logging      # Used for logging events and debugging
 
-# Logging Methods:
-# import logging
-# logging.getLogger("system").debug("System debug info.")
-# logging.getLogger("user").debug("User debug info.")
-# or
-# gremlin.util.display_error("Error popup")
+LEFT_SLIDER_UPDATE = False
+RIGHT_SLIDER_UPDATE = False
 
-# This module contains a time triggered (periodic) function which is designed to read the state of the sliders on the joysticks and report them irrespective if they have moved and caused an event.
-# Currently this function is disabled as I have a throttle +/- button press event mapped against my hats and don't want the setting overwritten by the slider position.
-
-# Periodic function (every second)
-@gremlin.input_devices.periodic(0.5)
+''' "Slider Update" function
+ Purpose: Forces a read of the current Slider positions of the joysticks then
+          sets the positions to the corresponding vJoy sliders
+ Notes:   The constants LEFT_SLIDER_UPDATE and RIGHT_SLIDER_UPDATE control
+          control whether these functions are performed.
+          This functionalilty is not desirable if a manual increment and 
+          decrement throttle is mapped to a button press as the value will be 
+          overwritten every time this is run.                               '''
 def slider_update(vjoy, joy):
-  
-  left_updating = False
-  right_updating = False
-  
-  if left_updating:
-    left_value = joy[0].axis(4).value # READ THE LEFT STICK SLIDER VALUE
-    if (left_value < 0.998): # SET THE VIRTUAL SLIDER VALUES WITH JITTER
+  if LEFT_SLIDER_UPDATE:
+    # Read physical left Slider
+    left_value = joy[0].axis(4).value      
+    # Add some jitter and set virtual left slider
+    if (left_value < 0.998):      
       vjoy[1].axis(7).value = (left_value + 0.002) 
     else:
       vjoy[1].axis(7).value = (left_value - 0.002) 
-    vjoy[1].axis(7).value = left_value # SET THE VIRTUAL SLIDER VALUES CORRECTLY
-  
-  if right_updating:
-    right_value = joy[1].axis(4).value  # READ THE RIGHT STICK SLIDER VALUE
-    if (right_value < 0.998): # SET THE VIRTUAL SLIDER VALUES WITH JITTER
+    time.sleep(0.1)
+    # Set the the virtual slider to the clean value
+    vjoy[1].axis(7).value = left_value      
+  if RIGHT_SLIDER_UPDATE:
+    # Read physical right Slider
+    right_value = joy[1].axis(4).value
+    # Add some jitter and set virtual right slider
+    if (right_value < 0.998):
       vjoy[2].axis(7).value = (right_value + 0.002) 
     else:
       vjoy[2].axis(7).value = (right_value - 0.002) 
-    vjoy[2].axis(7).value = right_value # SET THE VIRTUAL SLIDER VALUES CORRECTLY
-    
-  time.sleep(0.05)
+    time.sleep(0.1)
+    # Set the the virtual slider to the clean value
+    vjoy[2].axis(7).value = right_value
+
+# Periodic Function, every 0.5 seconds
+@gremlin.input_devices.periodic(0.5)
+def periodic_half_second(vjoy, joy):
+  slider_update(vjoy, joy)
+
+
+'''============================================================================
+LOGGING
+-------
+Adding a log entry into the log window of the JG GUI:
+  logging.getLogger("system").debug("System log entry.")
+  logging.getLogger("user").debug("User log entry.")
+Generating a popup:
+  gremlin.util.display_error("Error popup")
+============================================================================'''
