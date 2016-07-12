@@ -1,159 +1,199 @@
-import gremlin
-from gremlin.input_devices import keyboard, macro
-import time
-from vjoy.vjoy import AxisName
+import gremlin      # 'Coz it's a Joystick Gremlin module!
+import time         # Used for delays between actions in some functions
+import threading    # Threading allows the longer functions to be non-blocking
+import logging      # Used for logging events and debugging
 
-# used to allow the longer functions to not block the controllers while running
-import threading
+# Defining the controllers
+t16000m_left = gremlin.input_devices
+                .JoystickDecorator(name="T.16000M", 
+                                   device_id=(1325664945, 0),
+                                   mode="Default")
+t16000m_right = gremlin.input_devices
+                 .JoystickDecorator(name="T.16000M",
+                                    device_id=(1325664945, 1),
+                                    mode="Default")
+control_panel = gremlin.input_devices
+                 .JoystickDecorator(name="Arduino Leonardo", 
+                                    device_id=(1092826752, 4), 
+                                    mode="Default")
 
-# define the controllers
-right_t16000m = gremlin.input_devices.JoystickDecorator(name="T.16000M", device_id=(1325664945, 1), mode="Default")
-arduino_leonardo_1 = gremlin.input_devices.JoystickDecorator(name="Arduino Leonardo", device_id=(1092826752, 4), mode="Default")
-left_t16000m = gremlin.input_devices.JoystickDecorator(name="T.16000M", device_id=(1325664945, 0), mode="Default")
+'''============================================================================
 
-# Logging Methods:
-import logging
-# logging.getLogger("system").debug("System debug info.")
-# logging.getLogger("user").debug("User debug info.")
-# or
-# gremlin.util.display_error("Error popup")
+LOGGING
+-------
 
-def non_blocking_qt_gtfo(): # "QT GTFO" FUNCTION
-    # This function warps in the direction the ship is facing immediately. Used in emergencies.
-    # logging.getLogger("user").debug("GTFO running.")  
+Adding a log entry into the log window of the JG GUI:
+  logging.getLogger("system").debug("System log entry.")
+  logging.getLogger("user").debug("User log entry.")
 
+Generating a popup:
+  gremlin.util.display_error("Error popup")
+
+============================================================================'''
+
+TAP_LENGTH = 0.1   # Time (secs) between press and release of buttons
+
+''' "Quantum Escape" function
+ Purpose: Quantum travels in the direction the ship is facing in 
+          order to escape from enemies.
+ Notes:   Called as a threaded function to ensure that the controllers aren't
+          locked during the time it is running.                             '''
+def quantum_escape():
     vjoy = gremlin.input_devices.VJoyProxy()
     joy = gremlin.input_devices.JoystickProxy()
 
-    vjoy[2].button(30).is_pressed = True # ENABLE QT MODE
-    time.sleep(0.25)
+    vjoy[2].button(30).is_pressed = True     # Enable QT system
+    time.sleep(TAP_LENGTH)
     vjoy[2].button(30).is_pressed = False
-    time.sleep(1)
-    vjoy[2].button(29).is_pressed = True # QT ENGAGE
-    time.sleep(0.25)
+    time.sleep(1)                            # Wait for QT start-up
+    vjoy[2].button(29).is_pressed = True     # QT engage
+    time.sleep(TAP_LENGTH)
     vjoy[2].button(29).is_pressed = False
    
-# ARDUINO BUTTON 8 PRESS.
-@arduino_leonardo_1.button(7)
-def qt_gtfo(event, vjoy): # "QT GTFO" FUNCTION
+# Control Panel, Button 7 event (Quantum Escape)
+@control_panel.button(7)
+def cp_button7(event, vjoy):
     if event.is_pressed:
-      logging.getLogger("user").debug("'QT Escape' button pressed.")
-      threading.Timer(0.1, non_blocking_qt_gtfo).start()  
-    
-def non_blocking_all_cm_firing():
-    # This function fires the selected counter measure, toggles countermeasure, fires that counter measure and toggles back.
-    # logging.getLogger("user").debug("All CM running.")
-    
+      # The button event was a "press", so launch 
+      # the "Quantum Escape" function in a thread.
+      threading.Timer(0.1, quantum_escape).start()  
+
+''' "Fire Both CMs" function
+ Purpose: Fire the selected counter-measure (CM), Cycle to the other CM, fire
+          that CM, cycle back to the original CM.
+ Notes:   Called as a threaded function to ensure that the controllers aren't
+          locked during the time it is running.                             '''
+def fire_both_cms():
     vjoy = gremlin.input_devices.VJoyProxy()
     joy = gremlin.input_devices.JoystickProxy()
     
-    vjoy[1].button(38).is_pressed = True # FIRE COUNTER MEASURE
-    time.sleep(0.1)
+    vjoy[1].button(38).is_pressed = True     # Fire CM
+    time.sleep(TAP_LENGTH)
     vjoy[1].button(38).is_pressed = False
-    time.sleep(2)
-    
-    vjoy[1].button(40).is_pressed = True # CYCLE COUNTER MEASURE
-    time.sleep(0.1)
+    time.sleep(2)                            # Wait for firing
+    vjoy[1].button(40).is_pressed = True     # Cycle CM selection
+    time.sleep(TAP_LENGTH)
     vjoy[1].button(40).is_pressed = False
     time.sleep(1)
-    
-    vjoy[1].button(38).is_pressed = True # FIRE COUNTER MEASURE
-    time.sleep(0.1)
+    vjoy[1].button(38).is_pressed = True     # Fire CM
+    time.sleep(TAP_LENGTH)
     vjoy[1].button(38).is_pressed = False
-    time.sleep(2)
-    
-    vjoy[1].button(40).is_pressed = True # CYCLE COUNTER MEASURE
-    time.sleep(0.1)
+    time.sleep(2)                            # Wait for firing
+    vjoy[1].button(40).is_pressed = True     # Cycle CM selection
+    time.sleep(TAP_LENGTH)
     vjoy[1].button(40).is_pressed = False
     
-# ARDUINO BUTTON 16 PRESS.
-@arduino_leonardo_1.button(8)
-def all_cm(event, vjoy): # "ALL CM" FUNCTION
+# Control Panel, Button 8 event (Both C.M.)
+@control_panel.button(8)
+def cp_button8(event, vjoy):
     if event.is_pressed:
-      logging.getLogger("user").debug("'All C.M.' button pressed.")
-      threading.Timer(0.1, non_blocking_all_cm_firing).start()
+      # The button event was a "press", so launch 
+      # the "Fire Both CMs" function in a thread.
+      threading.Timer(0.1, fire_both_cms).start()
   
   
-######################################################
-##                                                  ##
-##  KEYBOARD MACROS ONLY WORK IN STAR CITIZEN IF    ##
-##  JOYSTICK GREMLIN IS LAUNCHED AS ADMINISTRATOR   ##
-##                                                  ##
-######################################################
-  
-# This macro toggles the chat window.
-macro_toggle_chat = macro.Macro()
+''' "Toggle Chat" Keyboard Macro
+ Purpose: Toggles the display of the chat window by emulating keyboard 
+          key-press F12.
+ Notes:   For the macro to work, Joystick Gremlin must be run as an 
+          administrator.
+          The chat window must be hidden when this is run as the first 
+          key-press toggles the chat window.                                '''
+macro_toggle_chat = gremlin.input_devices.macro.Macro()
 macro_toggle_chat.tap("F12")
 
-# ARDUINO BUTTON 54 PRESS.
-@arduino_leonardo_1.button(54)
-def custom_1(event, vjoy):
+# Control Panel, Button 54 event (Custom 1)
+@control_panel.button(54)
+def cp_button54(event, vjoy):
     if event.is_pressed:
-      logging.getLogger("user").debug("Custom 1 button pressed.")
+      # The button event was a "press", so run 
+      # the "Toggle Chat" Keyboard Macro.
       macro_toggle_chat.run()
 
-# This macro is the salute emote. It must be run with the chat window hidden.
-macro_salute = macro.Macro()
-macro_salute.tap(macro.Keys.F12)
-macro_salute.tap(macro.Keys.Enter)
-macro_salute.tap(macro.Keys.Slash)
-macro_salute.tap(macro.Keys.S)
-macro_salute.tap(macro.Keys.A)
-macro_salute.tap(macro.Keys.L)
-macro_salute.tap(macro.Keys.U)
-macro_salute.tap(macro.Keys.T)
-macro_salute.tap(macro.Keys.E)
-macro_salute.tap(macro.Keys.Enter)
-macro_salute.tap(macro.Keys.F12)
+''' "Salute Emote" Keyboard Macro
+ Purpose: Triggers the /salute emote by emulating keyboard 
+          key-presses F12, ENTER, /, S, A, L, U, T, E, ENTER, F12.
+ Notes:   For the macro to work, Joystick Gremlin must be run as an 
+          administrator.
+          The chat window must be hidden when this is run as the first 
+          key-press toggles the chat window.                                '''
+macro_salute_emote = gremlin.input_devices.macro.Macro()
+macro_salute_emote.tap(macro.Keys.F12)
+macro_salute_emote.tap(macro.Keys.Enter)
+macro_salute_emote.tap(macro.Keys.Slash)
+macro_salute_emote.tap(macro.Keys.S)
+macro_salute_emote.tap(macro.Keys.A)
+macro_salute_emote.tap(macro.Keys.L)
+macro_salute_emote.tap(macro.Keys.U)
+macro_salute_emote.tap(macro.Keys.T)
+macro_salute_emote.tap(macro.Keys.E)
+macro_salute_emote.tap(macro.Keys.Enter)
+macro_salute_emote.tap(macro.Keys.F12)
 
-# ARDUINO BUTTON 55 PRESS.
-@arduino_leonardo_1.button(55)
-def custom_2(event, vjoy):
+# Control Panel, Button 55 event (Custom 2)
+@control_panel.button(55)
+def cp_button55(event, vjoy):
     if event.is_pressed:
-      logging.getLogger("user").debug("Custom 2 button pressed.")
-      macro_salute.run()
+      # The button event was a "press", so run 
+      # the "Salute Emote" Keyboard Macro.
+      macro_salute_emote.run()
 
-# This macro is the rude (flip the bird, etc) emote. It must be run with the chat window hiudden.
-macro_rude = macro.Macro()
-macro_rude.tap(macro.Keys.F12)
-macro_rude.tap(macro.Keys.Enter)
-macro_rude.tap(macro.Keys.Slash)
-macro_rude.tap(macro.Keys.R)
-macro_rude.tap(macro.Keys.U)
-macro_rude.tap(macro.Keys.D)
-macro_rude.tap(macro.Keys.E)
-macro_rude.tap(macro.Keys.Enter)
-macro_rude.tap(macro.Keys.F12)
+''' "Rude Emote" Keyboard Macro
+ Purpose: Triggers the /rude emote by emulating keyboard 
+          key-presses F12, ENTER, /, R, U, D, E, ENTER, F12.
+ Notes:   For the macro to work, Joystick Gremlin must be run as an 
+          administrator.
+          The chat window must be hidden when this is run as the first 
+          key-press toggles the chat window.                                '''
+macro_rude_emote = gremlin.input_devices.macro.Macro()
+macro_rude_emote.tap(macro.Keys.F12)
+macro_rude_emote.tap(macro.Keys.Enter)
+macro_rude_emote.tap(macro.Keys.Slash)
+macro_rude_emote.tap(macro.Keys.R)
+macro_rude_emote.tap(macro.Keys.U)
+macro_rude_emote.tap(macro.Keys.D)
+macro_rude_emote.tap(macro.Keys.E)
+macro_rude_emote.tap(macro.Keys.Enter)
+macro_rude_emote.tap(macro.Keys.F12)
 
-# ARDUINO BUTTON 56 PRESS.
-@arduino_leonardo_1.button(56)
-def custom_3(event, vjoy):
+# Control Panel, Button 56 event (Custom 3)
+@control_panel.button(56)
+def cp_button56(event, vjoy):
     if event.is_pressed:
-      logging.getLogger("user").debug("Custom 3 button pressed.")
-      macro_rude.run()
+      # The button event was a "press", so run 
+      # the "Rude Emote" Keyboard Macro.
+      macro_rude_emote.run()
 
-# This macro toggles video recording.
-macro_toggle_video_rec = macro.Macro()
-macro_toggle_video_rec.press("RAlt")
-macro_toggle_video_rec.tap("F7")
-macro_toggle_video_rec.release("RAlt")
+''' "Toggle ShadowPlay - Recording" Keyboard Macro
+ Purpose: Toggles ShadowPlay Video Recording (which I have mapped to Alt-F7).
+ Notes:   For the macro to work, Joystick Gremlin must be run as an 
+          administrator.                                                    '''
+macro_toggle_sp_rec = gremlin.input_devices.macro.Macro()
+macro_toggle_sp_rec.press("RAlt")
+macro_toggle_sp_rec.tap("F7")
+macro_toggle_sp_rec.release("RAlt")
 
-# ARDUINO BUTTON 57 PRESS.
-@arduino_leonardo_1.button(57)
-def custom_4(event, vjoy):
+# Control Panel, Button 57 event (Custom 4)
+@control_panel.button(57)
+def cp_button57(event, vjoy):
     if event.is_pressed:
-      logging.getLogger("user").debug("Custom 4 button pressed.")
-      macro_toggle_video_rec.run()
+      # The button event was a "press", so run 
+      # the "Toggle ShadowPlay - Recording" Keyboard Macro
+      macro_toggle_sp_rec.run()
 
-# This macro saves the last 5 minutes of video (or other duration in buffer).
-macro_save_video_last_five = macro.Macro()
-macro_save_video_last_five.press("RAlt")
-macro_save_video_last_five.tap("F8")
-macro_save_video_last_five.release("RAlt")
+''' "ShadowPlay - Save Buffer" Keyboard Macro
+ Purpose: Saves the ShadowPlay Rolling Buffer (which I have mapped to Alt-F8).
+ Notes:   For the macro to work, Joystick Gremlin must be run as an 
+          administrator.                                                    '''
+macro_toggle_sp_save_buffer = gremlin.input_devices.macro.Macro()
+macro_toggle_sp_save_buffer.press("RAlt")
+macro_toggle_sp_save_buffer.tap("F8")
+macro_toggle_sp_save_buffer.release("RAlt")
    
-# ARDUINO BUTTON 58 PRESS.
-@arduino_leonardo_1.button(58)
-def custom_5(event, vjoy):
+# Control Panel, Button 58 event (Custom 5)
+@control_panel.button(58)
+def cp_button58(event, vjoy):
     if event.is_pressed:
-      logging.getLogger("user").debug("Custom 5 button pressed.")
-      macro_save_video_last_five.run()
+      # The button event was a "press", so run 
+      # the ''' "ShadowPlay - Save Buffer" Keyboard Macro
+      macro_toggle_sp_save_buffer.run()
