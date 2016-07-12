@@ -2,25 +2,6 @@
 <devices version="1">
     <device id="1325664945" name="T.16000M" windows_id="0">
         <mode name="Default">
-            <axis description="" id="1">
-                <remap axis="1" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="1"/>
-            </axis>
-            <axis description="" id="2">
-                <remap axis="2" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="1"/>
-                <response-curve>
-                    <mapping type="cubic-spline">
-                        <control-point x="-1.0" y="-1.0"/>
-                        <control-point x="1.0" y="1.0"/>
-                    </mapping>
-                    <deadzone center-high="0.0" center-low="0.0" high="1.0" low="-1.0"/>
-                </response-curve>
-            </axis>
-            <axis description="" id="3">
-                <remap axis="3" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="1"/>
-            </axis>
-            <axis always-execute="True" description="" id="4">
-                <remap axis="7" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="1"/>
-            </axis>
             <button description="" id="1">
                 <remap button="1" on-press="True" on-release="True" vjoy="1"/>
             </button>
@@ -45,6 +26,25 @@
             <button description="" id="14"/>
             <button description="" id="15"/>
             <button description="" id="16"/>
+            <axis description="" id="1">
+                <remap axis="1" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="1"/>
+            </axis>
+            <axis description="" id="2">
+                <remap axis="2" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="1"/>
+                <response-curve>
+                    <mapping type="cubic-spline">
+                        <control-point x="-1.0" y="-1.0"/>
+                        <control-point x="1.0" y="1.0"/>
+                    </mapping>
+                    <deadzone center-high="0.0" center-low="0.0" high="1.0" low="-1.0"/>
+                </response-curve>
+            </axis>
+            <axis description="" id="3">
+                <remap axis="3" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="1"/>
+            </axis>
+            <axis always-execute="True" description="" id="4">
+                <remap axis="7" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="1"/>
+            </axis>
             <hat description="" id="1"/>
         </mode>
     </device>
@@ -53,16 +53,6 @@
     </device>
     <device id="1325664945" name="T.16000M" windows_id="1">
         <mode name="Default">
-            <axis description="" id="1">
-                <remap axis="1" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="2"/>
-            </axis>
-            <axis description="" id="2">
-                <remap axis="2" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="2"/>
-            </axis>
-            <axis description="" id="3">
-                <remap axis="3" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="2"/>
-            </axis>
-            <axis description="" id="4"/>
             <button description="" id="1">
                 <remap button="1" on-press="True" on-release="True" vjoy="2"/>
             </button>
@@ -87,22 +77,21 @@
             <button description="" id="14"/>
             <button description="" id="15"/>
             <button description="" id="16"/>
+            <axis description="" id="1">
+                <remap axis="1" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="2"/>
+            </axis>
+            <axis description="" id="2">
+                <remap axis="2" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="2"/>
+            </axis>
+            <axis description="" id="3">
+                <remap axis="3" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="2"/>
+            </axis>
+            <axis description="" id="4"/>
             <hat description="" id="1"/>
         </mode>
     </device>
     <device id="1092826752" name="Arduino Leonardo" windows_id="4">
         <mode name="Default">
-            <axis description="" id="1"/>
-            <axis description="" id="2"/>
-            <axis description="" id="3"/>
-            <axis description="" id="4"/>
-            <axis description="" id="5"/>
-            <axis description="" id="6"/>
-            <axis description="" id="7"/>
-            <axis description="" id="8"/>
-            <axis description="" id="9"/>
-            <axis description="" id="10"/>
-            <axis description="" id="11"/>
             <button description="" id="1">
                 <remap button="7" on-press="True" on-release="True" vjoy="1"/>
             </button>
@@ -279,11 +268,23 @@
             <button description="" id="62"/>
             <button description="" id="63"/>
             <button description="" id="64"/>
+            <axis description="" id="1"/>
+            <axis description="" id="2"/>
+            <axis description="" id="3"/>
+            <axis description="" id="4"/>
+            <axis description="" id="5"/>
+            <axis description="" id="6"/>
+            <axis description="" id="7"/>
+            <axis description="" id="8"/>
+            <axis description="" id="9"/>
+            <axis description="" id="10"/>
+            <axis description="" id="11"/>
         </mode>
     </device>
     <import>
         <module name="custom_buttons"/>
-        <module name="hats_2_buttons"/>
         <module name="cyclic_functions"/>
+        <module name="hats_2_buttons"/>
+        <module name="initialisation"/>
     </import>
 </devices>
