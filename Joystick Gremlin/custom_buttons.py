@@ -7,21 +7,21 @@ import logging      # Used for logging events and debugging
 t16000m_left = gremlin.input_devices\
                  .JoystickDecorator(name = "T.16000M", 
                                     device_id = (1325664945, 
-                                                 0
+                                                 2
                                                 ), 
                                     mode = "Default"
                                    )
 t16000m_right = gremlin.input_devices\
                   .JoystickDecorator(name = "T.16000M", 
                                      device_id = (1325664945, 
-                                                  1
+                                                  0
                                                   ), 
                                      mode = "Default"
                                     )
 control_panel = gremlin.input_devices\
                   .JoystickDecorator(name = "Arduino Leonardo", 
                                      device_id = (1092826752, 
-                                                  4
+                                                  1
                                                  ), 
                                      mode="Default"
                                     )

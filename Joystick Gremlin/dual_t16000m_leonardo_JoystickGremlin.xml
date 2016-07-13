@@ -2,6 +2,7 @@
 <devices version="1">
     <device id="1325664945" name="T.16000M" windows_id="0">
         <mode name="Default">
+            <hat description="" id="1"/>
             <button description="" id="1">
                 <remap button="1" on-press="True" on-release="True" vjoy="1"/>
             </button>
@@ -45,14 +46,14 @@
             <axis always-execute="True" description="" id="4">
                 <remap axis="7" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="1"/>
             </axis>
-            <hat description="" id="1"/>
         </mode>
     </device>
     <device id="0" name="keyboard" windows_id="0">
         <mode name="Default"/>
     </device>
-    <device id="1325664945" name="T.16000M" windows_id="1">
+    <device id="1325664945" name="T.16000M" windows_id="2">
         <mode name="Default">
+            <hat description="" id="1"/>
             <button description="" id="1">
                 <remap button="1" on-press="True" on-release="True" vjoy="2"/>
             </button>
@@ -87,10 +88,9 @@
                 <remap axis="3" is-active="False" lower-limit="0.0" upper-limit="0.0" vjoy="2"/>
             </axis>
             <axis description="" id="4"/>
-            <hat description="" id="1"/>
         </mode>
     </device>
-    <device id="1092826752" name="Arduino Leonardo" windows_id="4">
+    <device id="1092826752" name="Arduino Leonardo" windows_id="1">
         <mode name="Default">
             <button description="" id="1">
                 <remap button="7" on-press="True" on-release="True" vjoy="1"/>
@@ -110,12 +110,8 @@
             <button description="" id="6">
                 <remap button="10" on-press="True" on-release="True" vjoy="2"/>
             </button>
-            <button description="" id="7">
-                <remap button="11" on-press="True" on-release="True" vjoy="2"/>
-            </button>
-            <button description="" id="8">
-                <remap button="12" on-press="True" on-release="True" vjoy="2"/>
-            </button>
+            <button description="" id="7"/>
+            <button description="" id="8"/>
             <button description="" id="9">
                 <remap button="18" on-press="True" on-release="True" vjoy="1"/>
             </button>
