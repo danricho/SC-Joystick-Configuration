@@ -1,4 +1,4 @@
-# import gremlin      # 'Coz it's a Joystick Gremlin module!
+import gremlin      # 'Coz it's a Joystick Gremlin module!
 import time         # Used for delays between actions in some functions
 import threading    # Threading allows the longer functions to be non-blocking
 import logging      # Used for logging events and debugging
@@ -18,7 +18,7 @@ control_panel = gremlin.input_devices.JoystickDecorator( \
                 device_id = (CP_HWID, CP_WID), \
                 mode = MODE_ALL )
 
-vjoy = gremlin.input_devices.VJoyProxy()                                    
+vjoy = gremlin.input_devices.VJoyProxy()
 
 ''' "Quantum Escape" function
  Purpose: Quantum travels in the direction the ship is facing in 

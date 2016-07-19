@@ -15,7 +15,7 @@ from configuration import *   # Holds the Joysticks IDs and other constants
 def slider_update(vjoy, joy):
   if LEFT_SLIDER_UPDATE:
     # Read physical left Slider
-    left_value = joy[2].axis(4).value      
+    left_value = joy[LFT_STK_WID].axis(4).value      
     # Add some jitter and set virtual left slider
     if (left_value < 0.998):      
       vjoy[1].axis(7).value = (left_value + 0.002) 
@@ -26,7 +26,7 @@ def slider_update(vjoy, joy):
     vjoy[1].axis(7).value = left_value      
   if RIGHT_SLIDER_UPDATE:
     # Read physical right Slider
-    right_value = joy[0].axis(4).value
+    right_value = joy[RGT_STK_WID].axis(4).value
     # Add some jitter and set virtual right slider
     if (right_value < 0.998):
       vjoy[2].axis(7).value = (right_value + 0.002) 
