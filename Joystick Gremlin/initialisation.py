@@ -1,5 +1,6 @@
 import gremlin      # 'Coz it's a Joystick Gremlin module!
 import logging      # Used for logging events and debugging
+from configuration import *   # Holds the Joysticks IDs and other constants
 
 ''' "Initialise Axes" function
  Purpose: This function sets all axes of both virtual joysticks to zero when

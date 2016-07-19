@@ -1,21 +1,17 @@
 import gremlin      # 'Coz it's a Joystick Gremlin module!
 import logging      # Used for logging events and debugging
+from configuration import *   # Holds the Joysticks IDs and other constants
 
 # Defining the controllers
-t16000m_left = gremlin.input_devices\
-                 .JoystickDecorator(name = "T.16000M", 
-                                    device_id = (1325664945, 
-                                                 2
-                                                ), 
-                                    mode = "Default"
-                                   )
-t16000m_right = gremlin.input_devices\
-                  .JoystickDecorator(name = "T.16000M", 
-                                     device_id = (1325664945, 
-                                                 0
-                                                  ), 
-                                     mode = "Default"
-                                    )
+t16000m_left = gremlin.input_devices.JoystickDecorator( \
+               name = STK_NAME, \
+               device_id = (STK_HWID, LFT_STK_WID), \
+               mode = MODE_ALL )
+t16000m_right = gremlin.input_devices.JoystickDecorator( \
+                name = STK_NAME, \
+                device_id = (STK_HWID, RGT_STK_WID), \
+                mode = MODE_ALL )
+                
 ''' "Hats to Buttons" function
  Purpose: Converts hat directions into button presses.                      '''
 def hats_to_buttons(evnt, joystick):

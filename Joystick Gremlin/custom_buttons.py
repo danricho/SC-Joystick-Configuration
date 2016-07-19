@@ -1,34 +1,24 @@
-import gremlin      # 'Coz it's a Joystick Gremlin module!
+# import gremlin      # 'Coz it's a Joystick Gremlin module!
 import time         # Used for delays between actions in some functions
 import threading    # Threading allows the longer functions to be non-blocking
 import logging      # Used for logging events and debugging
+from configuration import *   # Holds the Joysticks IDs and other constants
 
 # Defining the controllers
-t16000m_left = gremlin.input_devices\
-                 .JoystickDecorator(name = "T.16000M", 
-                                    device_id = (1325664945, 
-                                                 2
-                                                ), 
-                                    mode = "Default"
-                                   )
-t16000m_right = gremlin.input_devices\
-                  .JoystickDecorator(name = "T.16000M", 
-                                     device_id = (1325664945, 
-                                                  0
-                                                  ), 
-                                     mode = "Default"
-                                    )
-control_panel = gremlin.input_devices\
-                  .JoystickDecorator(name = "Arduino Leonardo", 
-                                     device_id = (1092826752, 
-                                                  1
-                                                 ), 
-                                     mode="Default"
-                                    )
-                                    
-vjoy = gremlin.input_devices.VJoyProxy()                                    
+t16000m_left = gremlin.input_devices.JoystickDecorator( \
+               name = STK_NAME, \
+               device_id = (STK_HWID, LFT_STK_WID), \
+               mode = MODE_ALL )
+t16000m_right = gremlin.input_devices.JoystickDecorator( \
+                name = STK_NAME, \
+                device_id = (STK_HWID, RGT_STK_WID), \
+                mode = MODE_ALL )
+control_panel = gremlin.input_devices.JoystickDecorator( \
+                name = CP_NAME, \
+                device_id = (CP_HWID, CP_WID), \
+                mode = MODE_ALL )
 
-TAP_LENGTH = 0.1   # Time (secs) between press and release of buttons
+vjoy = gremlin.input_devices.VJoyProxy()                                    
 
 ''' "Quantum Escape" function
  Purpose: Quantum travels in the direction the ship is facing in 

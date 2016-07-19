@@ -7,9 +7,8 @@ CP_WID = 0
 CP_HWID = 1092826752
 CP_NAME = "Arduino Leonardo"
 
-MODE_ALL = 'Default"
+MODE_ALL = "Default"
 
-# DECLARE THE JOYSTICKS:
-t16000m_left = gremlin.input_devices.JoystickDecorator(name = STK_NAME, device_id = (STK_HWID, LFT_STK_WID), mode = MODE_ALL)
-t16000m_right = gremlin.input_devices.JoystickDecorator(name = STK_NAME, device_id = (STK_HWID, RGT_STK_WID), mode = MODE_ALL)
-control_panel = gremlin.input_devices.JoystickDecorator(name = CP_NAME, device_id = (CP_HWID, CP_WID), mode = MODE_ALL)
+TAP_LENGTH = 0.1  # Time (secs) between press and release of buttons
+LEFT_SLIDER_UPDATE = False   # Disable the auto update of the Left Slider
+RIGHT_SLIDER_UPDATE = False   # Disable the auto update of the Right Slider

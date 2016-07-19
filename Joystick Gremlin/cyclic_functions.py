@@ -2,9 +2,7 @@ import gremlin      # 'Coz it's a Joystick Gremlin module!
 import time         # Used for delays between actions in some functions
 import threading    # Threading allows the longer functions to be non-blocking
 import logging      # Used for logging events and debugging
-
-LEFT_SLIDER_UPDATE = False
-RIGHT_SLIDER_UPDATE = False
+from configuration import *   # Holds the Joysticks IDs and other constants
 
 ''' "Slider Update" function
  Purpose: Forces a read of the current Slider positions of the joysticks then
