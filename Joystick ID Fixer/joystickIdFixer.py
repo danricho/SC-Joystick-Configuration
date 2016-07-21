@@ -16,6 +16,7 @@ try:
   sdl2.SDL_Init(sdl2.SDL_INIT_JOYSTICK)
 except:
   print " OOPS: Can't initialise SDL."
+  raw_input("\n Press Enter to Quit.")
   sys.exit(1)
   
 joysticks = []
@@ -48,7 +49,15 @@ def replaceInFile(filename, find, replace):
     line = line.replace(find, replace)
     sys.stdout.write(line)
   fileinput.close()
-     
+
+if sdl2.SDL_NumJoysticks() < 1:
+    print " OOPS: Can't find any joysticks."
+    print "  - Check they are connected."
+    print "  - Check they are listed in the \"USB Game Controllers\" utility."
+    raw_input("\n Press Enter to Quit.")
+    sys.exit(1)
+
+  
 for i in range(sdl2.SDL_NumJoysticks()):
   joy = sdl2.SDL_JoystickOpen(i)
   if joy is None:
@@ -84,9 +93,6 @@ for i in range(sdl2.SDL_NumJoysticks()):
     joysticks.append(joystick)
         
 joysticksSorted = sorted(joysticks, key=lambda k: k["Win ID"])
-
-print "\n Run from elevated command prompt (as administrator) "
-print " if you get an error when correcting the SC XML."
 
 # Resolve the Sticks (Press Left Trigger)
 print "\n-- RESOLVING THE STICKS --"
@@ -213,6 +219,8 @@ if not ResolvedName2Dict("Left Stick")["JGXML ID"] == ResolvedName2WinID("Left S
     replaceInFile(JGXML, 'windows_id="' + itIS + '"', 'windows_id="' + itSHALL + '"')
   except:
     print " OOPS: Can't change the Joystick Gremlin XML."
+    print "  - Check the path."
+    raw_input("\n Press Enter to Quit.")
     sys.exit(1)
   print " JG MAPPING XML Left Stick WID was incorrect; Changed from " + itIS + " to " + itSHALL + "."
   corrections_count += 1
@@ -224,6 +232,8 @@ if not ResolvedName2Dict("Right Stick")["JGXML ID"] == ResolvedName2WinID("Right
     replaceInFile(JGXML, 'windows_id="' + itIS + '"', 'windows_id="' + itSHALL + '"')
   except:
     print " OOPS: Can't change the Joystick Gremlin XML."
+    print "  - Check the path."
+    raw_input("\n Press Enter to Quit.")
     sys.exit(1)
   print " JG MAPPING XML Right Stick WID was incorrect; Changed from " + itIS + " to " + itSHALL + "."
   corrections_count += 1
@@ -235,6 +245,8 @@ if not ResolvedName2Dict("Control Panel")["JGXML ID"] == ResolvedName2WinID("Con
     replaceInFile(JGXML, 'windows_id="' + itIS + '"', 'windows_id="' + itSHALL + '"')
   except:
     print " OOPS: Can't change the Joystick Gremlin XML."
+    print "  - Check the path."
+    raw_input("\n Press Enter to Quit.")
     sys.exit(1)
   print " JG MAPPING XML Control Panel WID was incorrect; Changed from " + itIS + " to " + itSHALL + "."
   corrections_count += 1
@@ -248,6 +260,8 @@ if not ResolvedName2Dict("Left Stick")["JGPYCON ID"] == ResolvedName2WinID("Left
     replaceInFile(JGPYCON, 'LFT_STK_WID = ' + itIS, 'LFT_STK_WID = ' + itSHALL)
   except:
     print " OOPS: Can't change the Joystick Gremlin configuration module."
+    print "  - Check the path."
+    raw_input("\n Press Enter to Quit.")
     sys.exit(1)
   print " JG MAPPING XML Left Stick WID was incorrect; Changed from " + itIS + " to " + itSHALL + "."
   corrections_count += 1
@@ -259,6 +273,8 @@ if not ResolvedName2Dict("Right Stick")["JGPYCON ID"] == ResolvedName2WinID("Rig
     replaceInFile(JGPYCON, 'RGT_STK_WID = ' + itIS, 'RGT_STK_WID = ' + itSHALL)
   except:
     print " OOPS: Can't change the Joystick Gremlin configuration module."
+    print "  - Check the path."
+    raw_input("\n Press Enter to Quit.")
     sys.exit(1)
   print " JG MAPPING XML Right Stick WID was incorrect; Changed from " + itIS + " to " + itSHALL + "."
   corrections_count += 1
@@ -270,6 +286,8 @@ if not ResolvedName2Dict("Control Panel")["JGPYCON ID"] == ResolvedName2WinID("C
     replaceInFile(JGPYCON, 'CP_WID = ' + itIS, 'CP_WID = ' + itSHALL)
   except:
     print " OOPS: Can't change the Joystick Gremlin configuration module."
+    print "  - Check the path."
+    raw_input("\n Press Enter to Quit.")
     sys.exit(1)
   print " JG MAPPING XML Control Panel WID was incorrect; Changed from " + itIS + " to " + itSHALL + "."
   corrections_count += 1
@@ -284,6 +302,9 @@ if not ResolvedName2Dict("vJoy 1")["SCXML ID"] == ResolvedName2WinID("vJoy 1"):
     replaceInFile(SCXML, 'instance="' + itIS + '"', 'instance="' + itSHALL + '"')
   except:
     print " OOPS: Can't change the Star Citizen XML."
+    print "  - Try running from elevated command prompt (as administrator)."
+    print "  - Check the path."
+    raw_input("\n Press Enter to Quit.")
     sys.exit(1)
   print " SC KEYBINDING XML VJoy 1 WID was incorrect; Changed from " + itIS + " to " + itSHALL + "."
   corrections_count += 1
@@ -296,6 +317,9 @@ if not ResolvedName2Dict("vJoy 2")["SCXML ID"] == ResolvedName2WinID("vJoy 2"):
     replaceInFile(SCXML, 'instance="' + itIS + '"', 'instance="' + itSHALL + '"')
   except:
     print " OOPS: Can't change the Star Citizen XML."
+    print "  - Try running from elevated command prompt (as administrator)."
+    print "  - Check the path."
+    raw_input("\n Press Enter to Quit.")
     sys.exit(1)
   print " SC KEYBINDING XML VJoy 2 WID was incorrect; Changed from " + itIS + " to " + itSHALL + "."
   corrections_count += 1
