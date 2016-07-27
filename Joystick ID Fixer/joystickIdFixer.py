@@ -154,13 +154,7 @@ for device in devices:
           elif remap.getAttribute("vjoy") == "2":
             ResolvedName2Dict("Right Stick")["JGXML ID"] = int(device.getAttribute('windows_id'))
   elif device.getAttribute("name") == "Arduino Leonardo":
-    buttons = device.getElementsByTagName('button')
-    for button in buttons:
-      if button.getAttribute("id") == "1":
-        remaps = axis.getElementsByTagName('remap')
-        for remap in remaps:
-          if remap.getAttribute("vjoy") == "1":
-            ResolvedName2Dict("Control Panel")["JGXML ID"] = int(device.getAttribute('windows_id'))
+    ResolvedName2Dict("Control Panel")["JGXML ID"] = int(device.getAttribute('windows_id'))
 
 # Lets check the JG configuration.py
 print "-- PARSING THE JOYSTICK GREMLIN CUSTOM MODULE CONFIGURATION --"
@@ -242,7 +236,7 @@ if not ResolvedName2Dict("Control Panel")["JGXML ID"] == ResolvedName2WinID("Con
   itIS = str(ResolvedName2Dict("Control Panel")["JGXML ID"])
   itSHALL = str(ResolvedName2WinID("Control Panel"))
   try:
-    replaceInFile(JGXML, 'windows_id="' + itIS + '"', 'windows_id="' + itSHALL + '"')
+    replaceInFile(JGXML, 'eonardo" windows_id="' + itIS + '"', 'eonardo" windows_id="' + itSHALL + '"')
   except:
     print " OOPS: Can't change the Joystick Gremlin XML."
     print "  - Check the path."
